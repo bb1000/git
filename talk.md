@@ -1,6 +1,27 @@
 <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+<style>
+pre.code {
+    color: #ffffff;
+    background: #000000;
+    border-radius: 5px;
+    font-size: 0.8em;
+    padding: 15px;
+}
+span.red {
+   color: red;
+}
+span.green {
+   color: lightgreen;
+}
+span.cyan {
+   color: cyan;
+}
+span.commit {
+   color: orange;
+}
+</style>
 # Introduction to git
 
 BB1000 Programming in Python
@@ -125,37 +146,21 @@ $ cp -r Project Project.save.v2.new
 
 ### 11 basic commands
 
-<div class="col-md-6">
-    <ul>
-        <li>Initialize</li>
-        <ul>
-        <li>clone</li>
-        <li>init</li>
-        </ul>
-        <li>Queries</li>
-        <ul>
-        <li>status</li>
-        <li>log </li>
-        <li>diff</li>
-        </ul>
-    </ul>
-</div>
-<div class="col-md-6">
-    <ul>
-        <li>Changing locally</li>
-        <ul>
-        <li>add </li>
-        <li>commit</li>
-        <li>merge</li>
-        </ul>
-        <li>Remote interaction</li>
-        <ul>
-        <li>push</li>
-        <li>fetch</li>
-        <li>pull</li>
-        </ul>
-    </ul>
-</div>
+* Initialize
+   - clone
+   - init
+* Queries
+   - status
+   - log
+   - diff
+* Changing locally
+   - add
+   - commit
+   - merge
+* Remote interaction
+   - push
+   - fetch
+   - pull
 
 ---
 
@@ -188,7 +193,7 @@ Creates a configuration file ``~/.gitconfig``
     $ mkdir proj
 ```
 
-<pre>
+<pre class='foo'>
     proj/
 </pre>
 
@@ -206,13 +211,13 @@ Creates a configuration file ``~/.gitconfig``
 </pre>
 
 ---
+## Check status
 
 <pre>
 proj/
 └── .git
 </pre>
 
-## Check status
 
 * Check repository status
 
@@ -226,23 +231,23 @@ nothing to commit (create/copy files and use "git add" to track)
 ```
 
 ---
+## Create a new file `hello.py`
 
 <pre>
 proj
 ├── .git
-└── hello.py
+└── <text style="color: red;">hello.py</text>
 </pre>
 
-## Create a new file `hello.py`
 
-```python
+```
 #hello.py
 print("Hello world!")
 ```
 
 * Recheck status
 
-```
+<pre style="color: #ffffff; background: #000000; border-radius: 5px; font-size: 0.8em; padding: 15px">
 $ git status
 On branch master
 
@@ -251,14 +256,15 @@ No commits yet
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-    hello.py
+   <text style="color: red;">hello.py</text>
 
 nothing added to commit but untracked files present (use "git add" to track)
-```
+</pre>
 
 * Git warns about **untracked** files
 
 ---
+## Add file to Git
 
 <pre>
 proj
@@ -266,9 +272,8 @@ proj
 └── hello.py
 </pre>
 
-## Add file to Git
 
-```
+<pre class="code">
 $ git add hello.py
 
 $ git status
@@ -279,8 +284,8 @@ No commits yet
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 
-    new file:   hello.py
-```
+    <text style="color: lightgreen;"> new file:   hello.py</text>
+</pre>
 
 ### The staging area/cache
 
@@ -288,6 +293,7 @@ Changes to be committed:
 * This is an intermediate level between the work directory and repository
 
 ---
+## Save to repository
 
 <pre>
 proj
@@ -295,7 +301,6 @@ proj
 └── hello.py
 </pre>
 
-## Save to repository
 
 * Save the latest changes in the local repository (in `.git` directory)
 
@@ -373,13 +378,18 @@ The basic work cycle is edit-add-commit
 To see the commit history of the project files
 
 ```
-$ git log
-commit cf06b48ceb6f9c301867373845bd59e6620fb72f (HEAD -> master)
-Author: First Last <first.last@isp.com>
-Date:   Tue Mar 19 13:25:10 2019 +0100
-
-    First hello
+$ git log --oneline
+f56e3da (HEAD -> master) First hello
 ```
+
+<center>
+<img src="gitink/c1.svg">
+</center>
+
+* A branch is viewed as a line of a development
+* Initial default branch is always `master`
+* A branch in practise a label for a particular commit
+* HEAD is an alias for the current active branch
 
 ---
 
@@ -387,12 +397,10 @@ Date:   Tue Mar 19 13:25:10 2019 +0100
 
 * Consider a modified file
 
-```
-$ cat << EOF > hello.py
+```python
+#hello.py
 print("Hello there world!")
-EOF
 ```
-
 * git now recognizes this tracked file as modified
 
 ```
@@ -402,56 +410,58 @@ Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
-    modified:   hello.py
+        modified:   hello.py
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
-
 ---
 
-## Viewing changes (continued)
-
-* `git diff` shows the changes
+## Viewing changes
 
 ```
 $ git diff
 diff --git a/hello.py b/hello.py
-index f1a1813..086befc 100644
+index ed708ec..01c97be 100644
 --- a/hello.py
 +++ b/hello.py
 @@ -1 +1 @@
 -print("Hello world!")
 +print("Hello there world!")
 ```
-
 ---
 
-## Update repository
+## Save changes
+
+* First to cache
 
 ```bash
 $ git add hello.py
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   hello.py
 ```
+
+* then to repository
 
 ```bash
 $ git commit -m "Change greeting"
-[master 04064bc] Change greeting
+[master f7efe62] Change greeting
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
+---
+
+## History after commits
 
 ```bash
-$ git log
-commit 04064bc84ecaee64e3fb4c3dd54b73da33ec6986 (HEAD -> master)
-Author: First Last <first.last@isp.com>
-Date:   Tue Mar 19 13:33:10 2019 +0100
-
-    Change greeting
-
-commit cf06b48ceb6f9c301867373845bd59e6620fb72f
-Author: First Last <first.last@isp.com>
-Date:   Tue Mar 19 13:25:10 2019 +0100
-
-    First hello
+$ git log --oneline
+b895711 (HEAD -> master) Change greeting
+f56e3da First hello
 ```
+
+<center><img src="gitink/c2.svg"></center>
 
 ---
 
@@ -460,8 +470,8 @@ Date:   Tue Mar 19 13:25:10 2019 +0100
 * To retreive old verions, use checkout with the commit string
 
 ```
-$ git checkout cf06b4
-Note: checking out 'cf06b4'.
+$ git checkout f56e3da
+Note: checking out 'f56e3da'.
 
 You are in 'detached HEAD' state. You can look around, make experimental
 changes and commit them, and you can discard any commits you make in this
@@ -472,40 +482,148 @@ do so (now or later) by using -b with the checkout command again. Example:
 
   git checkout -b <new-branch-name>
 
-HEAD is now at cf06b48 First hello
+HEAD is now at f56e3da... First hello
 ```
 
 ```
 $ cat hello.py
-print("Hello world!")
+print("Hello world")!
 ```
 
 ---
 
-## Switch back to latest version
-
 ```
-$ git status
-HEAD detached at cf06b48
-nothing to commit, working tree clean
+$ git log --oneline --all
+b895711 (master) Change greeting
+f56e3da (HEAD) First hello
 ```
 
+<img src="gitink/c3.svg">
+
 ```
-$ git checkout master
-Previous HEAD position was cf06b48 First hello
+$git checkout master
+Previous HEAD position was f56e3da... First hello
 Switched to branch 'master'
 ```
 
+<img src="gitink/c4.svg">
+
+---
+
+## The work cycle
+
+There are three levels:
+
+* The work directory
+* The staging area
+* The repository
+
 ```
-$ git status
-On branch master
-nothing to commit, working directory clean
+repository (c1 -> c2 -> c3...)
+    ^
+    |   commit #save permanently in repository
+
+staging area (cache)
+
+    ^
+    |   add  #adds new file or saves latest changes
+
+work directory
+```
+
+---
+
+## Branches
+
+```
+$ git branch in-more-languages
+$ git checkout in-more-languages 
+Switched to branch 'in-more-languages'
+```
+```
+$ git log --oneline --all
+b895711 (HEAD -> in-more-languages, master) Change greeting
+f56e3da First hello
+```
+<img src="gitink/c5.svg">
+
+---
+
+## Work in the new branch
+
+```python
+#hello.py
+print("Hello there world!")
+print("Bonjour tout le monde!")
 ```
 
 ```
-$ cat hello.py
-print("Hello there world!")
+$ git add -u 
+$ git commit -m "French"
+[in-more-languages 84bfae8] French
+ 1 file changed, 1 insertion(+)
 ```
+
+```
+$ git log --oneline
+84bfae8 (HEAD -> in-more-languages) French
+b895711 (master) Change greeting
+f56e3da First hello
+```
+---
+
+## Work in the new branch
+
+```
+$ git log --oneline
+84bfae8 (HEAD -> in-more-languages) French
+b895711 (master) Change greeting
+f56e3da First hello
+```
+<center><img src="gitink/c6.svg"></center>
+
+---
+
+## Keep the changes: merge to master
+
+```
+$ git checkout master
+Switched to branch 'master'
+```
+<center><img src="gitink/c7.svg"></center>
+
+---
+
+## Keep the changes: merge to master
+
+* Incorporate the changes from the `in-more-languages` branch
+
+```
+$ git merge in-more-languages 
+Updating b895711..84bfae8
+Fast-forward
+ hello.py | 1 +
+ 1 file changed, 1 insertion(+)
+```
+<center><img src="gitink/c8.svg"></center>
+
+---
+
+## Keep the changes: merge to master
+
+* If the old branch is not needed it may be deleted
+
+```
+$ git branch -d in-more-languages 
+Deleted branch in-more-languages (was 84bfae8).
+
+```
+<center><img src="gitink/c9.svg"></center>
+
+* Note: the branch concept brings to mind a certain line of development, like the
+branch of a tree. However a git branch name essentially a label for a
+particular commit. If one commit has two labels one of them can easily be
+deleted without loosing any information.
 
 ---
 
@@ -513,10 +631,10 @@ print("Hello there world!")
 
 * Necessary for collaborative projects
 * Useful for single-user projects
-* Web-services, github, bitbucket
+* Web-services, github, gitlab, bitbucket
 * A shared directory (NFS, AFS, Dropbox....)
-* git pull from remote
-* git push to remote
+* `git pull` from remote
+* `git push` to remote
 
 ```
 repository (.git)  <->   remote
@@ -535,140 +653,148 @@ work directory     <- init, clone
 
 ---
 
-### A shared directory repository
+## Working with KTH github
 
-* Create an empty remote repository
-```
-    $ git init --bare ~/Dropbox/proj.git
-    Initialized empty Git repository in /home/olav/Dropbox/proj.git/
-```
---
+* See https://www.kth.se/student/kth-it-support/work-online/kth-github
+* Go to https://gits-15.sys.kth.se and log in with your KTH account
+* You need to upload ssh keys for this service
 
-* Create an alias for the remote repository
-```
-    $ git remote add dropbox ~/Dropbox/hello.git
-    $ git remote -v
-    dropbox	/home/olav/Dropbox/proj.git (fetch)
-    dropbox	/home/olav/Dropbox/proj.git (push)
-```
---
+---
 
-* Let the local branch track the remote repository
+## Uploading a local repository
+
+* Having logged in create a new empty repository in the browser
+* Locally define an alias for the new remote repository: any name will do but
+  *origin* is a common convention
+
 ```
-    $ git push -u dropbox master
-    Counting objects: 6, done.
-    Delta compression using up to 4 threads.
-    Compressing objects: 100% (2/2), done.
-    Writing objects: 100% (6/6), 473 bytes | 0 bytes/s, done.
-    Total 6 (delta 0), reused 0 (delta 0)
-    To /home/olav/Dropbox/proj.git
-     * [new branch]      master -> master
-    Branch master set up to track remote branch master from dropbox.
+$ git remote add origin git@gits-15.sys.kth.se:<user>/proj
+```
+
+```
+$ git remote -v
+origin git@gits-15.sys.kth.se:<user>/proj (fetch)
+origin git@gits-15.sys.kth.se:<user>/proj (push)
+```
+
+* push the local to the remote, and let the local branch track the remote repository
+
+```
+$ git push --set-upstream origin master
+...
+To git@gits-15.sys.kth.se
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+$ git branch -vv
+ * master 84bfae8 [origin/master] French
 ```
 
 ---
 
+## Remote repository (origin)
 
-* Now your local is in sync with your remote
-* Make another local change
+<img src="gitink/c9.svg">
 
-```
-    $ cat << EOF > hello.py
-    print "HELLO THERE WORLD!"
-    EOF
-```
-
-```
-    $ git add hello.py
-```
-
-```
-    $ git commit -m "Capitalize"
-    [master cb05b3f] Capitalize
-     1 file changed, 1 insertion(+), 1 deletion(-)
-```
+After the push operations the remote repository  has the same information as
+the local
 
 ---
 
-### Backup to remote
+## Local repository
 
-* View local changes
-```
-    $ git status
-    On branch master
-    Your branch is ahead of 'origin/master' by 1 commit.
-      (use "git push" to publish your local commits)
+<img src="gitink/c10.svg">
 
-    nothing to commit, working directory clean
-```
-
-* Backup to remote repository
-```
-    $ git push
-    Counting objects: 5, done.
-    Writing objects: 100% (3/3), 269 bytes | 0 bytes/s, done.
-    Total 3 (delta 0), reused 0 (delta 0)
-    To /home/olav/Dropbox/proj.git
-       f7efe62..cb05b3f  master -> master
-```
+In local repository also have knowledge about the status of the remote
+repositry in terms of an extra branch name `origin/master`
 
 ---
 
-### Continue work on another computer
+## Continue work on another computer
 
-* With access to the same shared file system
+* get a copy of the repository
+
 ```
-    |Other> git clone ~/Dropbox/proj.git
+    $ git clone git@gits-15.sys.kth.se:<user>/proj.git
     Cloning into 'proj'...
     done.
-    |Other> cd proj
+    $ cd proj
 ```
-* work on remote
+* work on other computer and push back changes
     - edit -> add -> commit -> push
 
 ---
 
-### Back on local
-
-* Retrieve changes that was made on another system
-
-* By you or another developer
+## On another computer
 
 ```
-    $ git pull
-    remote: Counting objects: 5, done.
-    remote: Total 3 (delta 0), reused 0 (delta 0)
-    Unpacking objects: 100% (3/3), done.
-    From /home/olav/Dropbox/proj
-       cb05b3f..d5fe073  master     -> origin/master
-    Updating cb05b3f..d5fe073
-    Fast-forward
-     hello.py | 2 +-
-     1 file changed, 1 insertion(+), 1 deletion(-)
-
+$ git commit
 ```
+
+<img src="gitink/c11.svg">
 
 ---
 
-### Summary of work cycle
+## On another computer
+
+```
+$ git push
+```
+
+<img src="gitink/c12.svg">
+
+---
+
+## Back on local computer
+
+<img src="gitink/c10.svg">
+
+---
+
+## Back on local computer
+
+* Retrieve changes that was made on another system
+
+```
+$ git fetch  # obtain new remote commits but do not change anything locally
+```
+
+<img src="gitink/c13.svg">
+
+---
+
+## Back on local computer
+
+```
+$ git pull # does a fetch and a merge to your local repository
+```
+<img src="gitink/c14.svg">
+
+---
+
+## Summary of work cycle
 
 * Start a new project
+
 ```
     $ git init
 ```
 
 * Get a copy of existing project
+
 ```
     $ git clone
 ```
 
 * Locally: edit-add-commit
+
 ```
     $ vim ...
     $ git add...
     $ git commit...
 ```
+
 * Sync with remote: pull-push
+
 ```
     $ git pull
     $ git push
@@ -676,10 +802,77 @@ work directory     <- init, clone
 
 ---
 
-### Use a remote server (service)
+## Github collaborative workflow
 
-* github.com (free for public projects)
-* gitlab.com  (free for public and private projects)
+Contributing to open source
+
+* In the web interface of the reference repo, fork a copy to your own account
+* Clone from your copied repository to your work space. By default your fork
+will have now have remote label 'origin'
+* It is customary to define the reference repo with the remote label "upstream"
+
+```
+$ git remote add upstream <url of reference repo>
+```
+
+---
+
+## Github collaborative workflow
+
+* Retrieve the current information from the reference repo
+
+```
+$ git fetch upstream
+```
+
+<img src="gitink/c15.svg">
+
+---
+
+## Github collaborative workflow
+
+* Create and checkout a 'fix' branch for a particular change
+
+```
+$ git checkout -b fix
+```
+
+* Edit the file, add and commit locally
+
+```
+$ git add .
+$ git commit -m "This is my fix"
+```
+
+<img src="gitink/c16.svg">
+
+---
+
+## Github collaborative workflow
+
+* Push the fix branch to your copy repo
+
+```
+$ git push origin fix
+```
+
+<img src="gitink/c17.svg">
+
+* Now you are ready to do a pull request in the Github web interface
+
+---
+
+## Github workflow scheme
+
+<div class="row">
+<div class="col-md-9">
+<img class="img-responsive" src="https://lh3.googleusercontent.com/e56nmW1H1vOmGoR0EVswqus0EcCFMPjefwrFDc6KS5Gm2Yc7P1VEy9WrxHu7iqkst6t-WFhhpXYqhwcY1cOAPUNLbimPm7Uvkl4ZanbNKed-wqFs1eae_hLvDB0jdko0hfNibGl7FA=w2400">
+</div>
+</div>
+
+Drawing by Erik Fasterius
+
+---
 
 ### Links
 
@@ -690,3 +883,8 @@ work directory     <- init, clone
 * https://www.linux.com/learn/fixing-mistakes-git
 * http://christoph.ruegg.name/blog/git-howto-revert-a-commit-already-pushed-to-a-remote-reposit.html
 * http://git-man-page-generator.lokaltog.net/
+
+### Acknowledgement
+
+* Figures produced with [gitink](https://github.com/bast/gitink) software by Radovan Bast
+
