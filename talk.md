@@ -377,10 +377,10 @@ The basic work cycle is edit-add-commit
 
 To see the commit history of the project files
 
-```
+<pre class="code">
 $ git log --oneline
-f56e3da (HEAD -> master) First hello
-```
+<span class="commit">f56e3da</span> (<span class="cyan">HEAD</span> -> <span class="green">master</span>) First hello
+</pre>
 
 <center>
 <img src="gitink/c1.svg">
@@ -397,37 +397,40 @@ f56e3da (HEAD -> master) First hello
 
 * Consider a modified file
 
-```python
+<pre class="code">
 #hello.py
 print("Hello there world!")
-```
+</pre>
+
 * git now recognizes this tracked file as modified
 
-```
+<pre class="code">
 $ git status
 On branch master
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
-        modified:   hello.py
+        <span class="red">modified:   hello.py</span>
 
 no changes added to commit (use "git add" and/or "git commit -a")
-```
+</pre>
+
 ---
 
 ## Viewing changes
 
-```
+<pre class="code">
 $ git diff
 diff --git a/hello.py b/hello.py
 index ed708ec..01c97be 100644
 --- a/hello.py
 +++ b/hello.py
-@@ -1 +1 @@
--print("Hello world!")
-+print("Hello there world!")
-```
+<span class="cyan" >@@ -1 +1 @@</span>
+<span class="red"  >-print("Hello world!")</span>
+<span class="green">+print("Hello there world!")</span>
+</pre>
+
 ---
 
 ## Save changes

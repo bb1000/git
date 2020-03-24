@@ -137,10 +137,10 @@ class: center, middle, inverse
 
 ---
 
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<style>
+&lt;script type=&#34;text/javascript&#34;
+  src=&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;&gt;
+&lt;/script&gt;
+&lt;style&gt;
 pre.code {
     color: #ffffff;
     background: #000000;
@@ -160,7 +160,7 @@ span.cyan {
 span.commit {
    color: orange;
 }
-</style>
+&lt;/style&gt;
 # Introduction to git
 
 BB1000 Programming in Python
@@ -227,17 +227,17 @@ $ cp -r Project Project.save.v2.new
 
 ---
 
-<center>
-<img src="http://www.phdcomics.com/comics/archive/phd101212s.gif" height="500"/>
-</center>
+&lt;center&gt;
+&lt;img src=&#34;http://www.phdcomics.com/comics/archive/phd101212s.gif&#34; height=&#34;500&#34;/&gt;
+&lt;/center&gt;
 
 ---
 
 ## Introducing git
 
-<center>
-<img src="http://www.linux.com/images/stories/714/Linus-Torvalds-LinuxCon-Europe-2014.jpg" height="250" />
-</center>
+&lt;center&gt;
+&lt;img src=&#34;http://www.linux.com/images/stories/714/Linus-Torvalds-LinuxCon-Europe-2014.jpg&#34; height=&#34;250&#34; /&gt;
+&lt;/center&gt;
 
 
 * Written by Linus Thorvalds, originally for the Linux kernel
@@ -308,8 +308,8 @@ $ cp -r Project Project.save.v2.new
 ### The first time around
 
 ```
-    $ git config --global user.name "First Last"
-    $ git config --global user.email "first.last@isp.com"
+    $ git config --global user.name &#34;First Last&#34;
+    $ git config --global user.email &#34;first.last@isp.com&#34;
 ```
 
 Creates a configuration file ``~/.gitconfig``
@@ -332,9 +332,9 @@ Creates a configuration file ``~/.gitconfig``
     $ mkdir proj
 ```
 
-<pre class='foo'>
+&lt;pre class=&#39;foo&#39;&gt;
     proj/
-</pre>
+&lt;/pre&gt;
 
 * Go to the directory and initialize
 
@@ -344,18 +344,18 @@ Creates a configuration file ``~/.gitconfig``
     Initialized empty Git repository in (...)proj/.git/
 ```
 
-<pre>
+&lt;pre&gt;
     proj/
     └── .git
-</pre>
+&lt;/pre&gt;
 
 ---
 ## Check status
 
-<pre>
+&lt;pre&gt;
 proj/
 └── .git
-</pre>
+&lt;/pre&gt;
 
 
 * Check repository status
@@ -366,53 +366,53 @@ On branch master
 
 No commits yet
 
-nothing to commit (create/copy files and use "git add" to track)
+nothing to commit (create/copy files and use &#34;git add&#34; to track)
 ```
 
 ---
 ## Create a new file `hello.py`
 
-<pre>
+&lt;pre&gt;
 proj
 ├── .git
-└── <text style="color: red;">hello.py</text>
-</pre>
+└── &lt;text style=&#34;color: red;&#34;&gt;hello.py&lt;/text&gt;
+&lt;/pre&gt;
 
 
 ```
 #hello.py
-print("Hello world!")
+print(&#34;Hello world!&#34;)
 ```
 
 * Recheck status
 
-<pre style="color: #ffffff; background: #000000; border-radius: 5px; font-size: 0.8em; padding: 15px">
+&lt;pre style=&#34;color: #ffffff; background: #000000; border-radius: 5px; font-size: 0.8em; padding: 15px&#34;&gt;
 $ git status
 On branch master
 
 No commits yet
 
 Untracked files:
-  (use "git add <file>..." to include in what will be committed)
+  (use &#34;git add &lt;file&gt;...&#34; to include in what will be committed)
 
-   <text style="color: red;">hello.py</text>
+   &lt;text style=&#34;color: red;&#34;&gt;hello.py&lt;/text&gt;
 
-nothing added to commit but untracked files present (use "git add" to track)
-</pre>
+nothing added to commit but untracked files present (use &#34;git add&#34; to track)
+&lt;/pre&gt;
 
 * Git warns about **untracked** files
 
 ---
 ## Add file to Git
 
-<pre>
+&lt;pre&gt;
 proj
 ├── .git
 └── hello.py
-</pre>
+&lt;/pre&gt;
 
 
-<pre class="code">
+&lt;pre class=&#34;code&#34;&gt;
 $ git add hello.py
 
 $ git status
@@ -421,10 +421,10 @@ On branch master
 No commits yet
 
 Changes to be committed:
-  (use "git rm --cached <file>..." to unstage)
+  (use &#34;git rm --cached &lt;file&gt;...&#34; to unstage)
 
-    <text style="color: lightgreen;"> new file:   hello.py</text>
-</pre>
+    &lt;text style=&#34;color: lightgreen;&#34;&gt; new file:   hello.py&lt;/text&gt;
+&lt;/pre&gt;
 
 ### The staging area/cache
 
@@ -434,17 +434,17 @@ Changes to be committed:
 ---
 ## Save to repository
 
-<pre>
+&lt;pre&gt;
 proj
 ├── .git
 └── hello.py
-</pre>
+&lt;/pre&gt;
 
 
 * Save the latest changes in the local repository (in `.git` directory)
 
 ```
-    $ git commit -m "First hello"
+    $ git commit -m &#34;First hello&#34;
     [master (root-commit) cf06b48] First hello
      1 file changed, 1 insertion(+)
      create mode 100644 hello.py
@@ -477,7 +477,7 @@ staging area (cache)
     ^
     |   add
 
-work directory     <- init
+work directory     &lt;- init
 ```
 
 ---
@@ -499,15 +499,15 @@ staging area (cache)
     ^
     |   add
 
-work directory     <- init
+work directory     &lt;- init
 ```
 
 The basic work cycle is edit-add-commit
 
 ```
-    $ <edit> <file>   # edit your file
-    $ git add <file>  # cache your changes
-    $ git commit -m <message> <file>  # save your changes in repository
+    $ &lt;edit&gt; &lt;file&gt;   # edit your file
+    $ git add &lt;file&gt;  # cache your changes
+    $ git commit -m &lt;message&gt; &lt;file&gt;  # save your changes in repository
 ```
 
 ---
@@ -516,14 +516,14 @@ The basic work cycle is edit-add-commit
 
 To see the commit history of the project files
 
-```
+&lt;pre class=&#34;code&#34;&gt;
 $ git log --oneline
-f56e3da (HEAD -> master) First hello
-```
+&lt;span class=&#34;commit&#34;&gt;f56e3da&lt;/span&gt; (&lt;span class=&#34;cyan&#34;&gt;HEAD&lt;/span&gt; -&gt; &lt;span class=&#34;green&#34;&gt;master&lt;/span&gt;) First hello
+&lt;/pre&gt;
 
-<center>
-<img src="gitink/c1.svg">
-</center>
+&lt;center&gt;
+&lt;img src=&#34;gitink/c1.svg&#34;&gt;
+&lt;/center&gt;
 
 * A branch is viewed as a line of a development
 * Initial default branch is always `master`
@@ -536,37 +536,40 @@ f56e3da (HEAD -> master) First hello
 
 * Consider a modified file
 
-```python
+&lt;pre class=&#34;code&#34;&gt;
 #hello.py
-print("Hello there world!")
-```
+print(&#34;Hello there world!&#34;)
+&lt;/pre&gt;
+
 * git now recognizes this tracked file as modified
 
-```
+&lt;pre class=&#34;code&#34;&gt;
 $ git status
 On branch master
 Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
+  (use &#34;git add &lt;file&gt;...&#34; to update what will be committed)
+  (use &#34;git checkout -- &lt;file&gt;...&#34; to discard changes in working directory)
 
-        modified:   hello.py
+        &lt;span class=&#34;red&#34;&gt;modified:   hello.py&lt;/span&gt;
 
-no changes added to commit (use "git add" and/or "git commit -a")
-```
+no changes added to commit (use &#34;git add&#34; and/or &#34;git commit -a&#34;)
+&lt;/pre&gt;
+
 ---
 
 ## Viewing changes
 
-```
+&lt;pre class=&#34;code&#34;&gt;
 $ git diff
 diff --git a/hello.py b/hello.py
 index ed708ec..01c97be 100644
 --- a/hello.py
 +++ b/hello.py
-@@ -1 +1 @@
--print("Hello world!")
-+print("Hello there world!")
-```
+&lt;span class=&#34;cyan&#34; &gt;@@ -1 +1 @@&lt;/span&gt;
+&lt;span class=&#34;red&#34;  &gt;-print(&#34;Hello world!&#34;)&lt;/span&gt;
+&lt;span class=&#34;green&#34;&gt;+print(&#34;Hello there world!&#34;)&lt;/span&gt;
+&lt;/pre&gt;
+
 ---
 
 ## Save changes
@@ -578,7 +581,7 @@ $ git add hello.py
 $ git status
 On branch master
 Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
+  (use &#34;git reset HEAD &lt;file&gt;...&#34; to unstage)
 
 	modified:   hello.py
 ```
@@ -586,7 +589,7 @@ Changes to be committed:
 * then to repository
 
 ```bash
-$ git commit -m "Change greeting"
+$ git commit -m &#34;Change greeting&#34;
 [master f7efe62] Change greeting
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
@@ -596,11 +599,11 @@ $ git commit -m "Change greeting"
 
 ```bash
 $ git log --oneline
-b895711 (HEAD -> master) Change greeting
+b895711 (HEAD -&gt; master) Change greeting
 f56e3da First hello
 ```
 
-<center><img src="gitink/c2.svg"></center>
+&lt;center&gt;&lt;img src=&#34;gitink/c2.svg&#34;&gt;&lt;/center&gt;
 
 ---
 
@@ -610,23 +613,23 @@ f56e3da First hello
 
 ```
 $ git checkout f56e3da
-Note: checking out 'f56e3da'.
+Note: checking out &#39;f56e3da&#39;.
 
-You are in 'detached HEAD' state. You can look around, make experimental
+You are in &#39;detached HEAD&#39; state. You can look around, make experimental
 changes and commit them, and you can discard any commits you make in this
 state without impacting any branches by performing another checkout.
 
 If you want to create a new branch to retain commits you create, you may
 do so (now or later) by using -b with the checkout command again. Example:
 
-  git checkout -b <new-branch-name>
+  git checkout -b &lt;new-branch-name&gt;
 
 HEAD is now at f56e3da... First hello
 ```
 
 ```
 $ cat hello.py
-print("Hello world")!
+print(&#34;Hello world&#34;)!
 ```
 
 ---
@@ -637,15 +640,15 @@ b895711 (master) Change greeting
 f56e3da (HEAD) First hello
 ```
 
-<img src="gitink/c3.svg">
+&lt;img src=&#34;gitink/c3.svg&#34;&gt;
 
 ```
 $git checkout master
 Previous HEAD position was f56e3da... First hello
-Switched to branch 'master'
+Switched to branch &#39;master&#39;
 ```
 
-<img src="gitink/c4.svg">
+&lt;img src=&#34;gitink/c4.svg&#34;&gt;
 
 ---
 
@@ -658,7 +661,7 @@ There are three levels:
 * The repository
 
 ```
-repository (c1 -> c2 -> c3...)
+repository (c1 -&gt; c2 -&gt; c3...)
     ^
     |   commit #save permanently in repository
 
@@ -677,14 +680,14 @@ work directory
 ```
 $ git branch in-more-languages
 $ git checkout in-more-languages 
-Switched to branch 'in-more-languages'
+Switched to branch &#39;in-more-languages&#39;
 ```
 ```
 $ git log --oneline --all
-b895711 (HEAD -> in-more-languages, master) Change greeting
+b895711 (HEAD -&gt; in-more-languages, master) Change greeting
 f56e3da First hello
 ```
-<img src="gitink/c5.svg">
+&lt;img src=&#34;gitink/c5.svg&#34;&gt;
 
 ---
 
@@ -692,20 +695,20 @@ f56e3da First hello
 
 ```python
 #hello.py
-print("Hello there world!")
-print("Bonjour tout le monde!")
+print(&#34;Hello there world!&#34;)
+print(&#34;Bonjour tout le monde!&#34;)
 ```
 
 ```
 $ git add -u 
-$ git commit -m "French"
+$ git commit -m &#34;French&#34;
 [in-more-languages 84bfae8] French
  1 file changed, 1 insertion(+)
 ```
 
 ```
 $ git log --oneline
-84bfae8 (HEAD -> in-more-languages) French
+84bfae8 (HEAD -&gt; in-more-languages) French
 b895711 (master) Change greeting
 f56e3da First hello
 ```
@@ -715,11 +718,11 @@ f56e3da First hello
 
 ```
 $ git log --oneline
-84bfae8 (HEAD -> in-more-languages) French
+84bfae8 (HEAD -&gt; in-more-languages) French
 b895711 (master) Change greeting
 f56e3da First hello
 ```
-<center><img src="gitink/c6.svg"></center>
+&lt;center&gt;&lt;img src=&#34;gitink/c6.svg&#34;&gt;&lt;/center&gt;
 
 ---
 
@@ -727,9 +730,9 @@ f56e3da First hello
 
 ```
 $ git checkout master
-Switched to branch 'master'
+Switched to branch &#39;master&#39;
 ```
-<center><img src="gitink/c7.svg"></center>
+&lt;center&gt;&lt;img src=&#34;gitink/c7.svg&#34;&gt;&lt;/center&gt;
 
 ---
 
@@ -744,7 +747,7 @@ Fast-forward
  hello.py | 1 +
  1 file changed, 1 insertion(+)
 ```
-<center><img src="gitink/c8.svg"></center>
+&lt;center&gt;&lt;img src=&#34;gitink/c8.svg&#34;&gt;&lt;/center&gt;
 
 ---
 
@@ -757,7 +760,7 @@ $ git branch -d in-more-languages
 Deleted branch in-more-languages (was 84bfae8).
 
 ```
-<center><img src="gitink/c9.svg"></center>
+&lt;center&gt;&lt;img src=&#34;gitink/c9.svg&#34;&gt;&lt;/center&gt;
 
 * Note: the branch concept brings to mind a certain line of development, like the
 branch of a tree. However a git branch name essentially a label for a
@@ -776,7 +779,7 @@ deleted without loosing any information.
 * `git push` to remote
 
 ```
-repository (.git)  <->   remote
+repository (.git)  &lt;-&gt;   remote
                 pull,push
 
     ^
@@ -787,7 +790,7 @@ staging area (cache)
     ^
     |   add
 
-work directory     <- init, clone
+work directory     &lt;- init, clone
 ```
 
 ---
@@ -807,13 +810,13 @@ work directory     <- init, clone
   *origin* is a common convention
 
 ```
-$ git remote add origin git@gits-15.sys.kth.se:<user>/proj
+$ git remote add origin git@gits-15.sys.kth.se:&lt;user&gt;/proj
 ```
 
 ```
 $ git remote -v
-origin git@gits-15.sys.kth.se:<user>/proj (fetch)
-origin git@gits-15.sys.kth.se:<user>/proj (push)
+origin git@gits-15.sys.kth.se:&lt;user&gt;/proj (fetch)
+origin git@gits-15.sys.kth.se:&lt;user&gt;/proj (push)
 ```
 
 * push the local to the remote, and let the local branch track the remote repository
@@ -822,7 +825,7 @@ origin git@gits-15.sys.kth.se:<user>/proj (push)
 $ git push --set-upstream origin master
 ...
 To git@gits-15.sys.kth.se
- * [new branch]      master -> master
+ * [new branch]      master -&gt; master
 Branch master set up to track remote branch master from origin.
 $ git branch -vv
  * master 84bfae8 [origin/master] French
@@ -832,7 +835,7 @@ $ git branch -vv
 
 ## Remote repository (origin)
 
-<img src="gitink/c9.svg">
+&lt;img src=&#34;gitink/c9.svg&#34;&gt;
 
 After the push operations the remote repository  has the same information as
 the local
@@ -841,7 +844,7 @@ the local
 
 ## Local repository
 
-<img src="gitink/c10.svg">
+&lt;img src=&#34;gitink/c10.svg&#34;&gt;
 
 In local repository also have knowledge about the status of the remote
 repositry in terms of an extra branch name `origin/master`
@@ -853,13 +856,13 @@ repositry in terms of an extra branch name `origin/master`
 * get a copy of the repository
 
 ```
-    $ git clone git@gits-15.sys.kth.se:<user>/proj.git
-    Cloning into 'proj'...
+    $ git clone git@gits-15.sys.kth.se:&lt;user&gt;/proj.git
+    Cloning into &#39;proj&#39;...
     done.
     $ cd proj
 ```
 * work on other computer and push back changes
-    - edit -> add -> commit -> push
+    - edit -&gt; add -&gt; commit -&gt; push
 
 ---
 
@@ -869,7 +872,7 @@ repositry in terms of an extra branch name `origin/master`
 $ git commit
 ```
 
-<img src="gitink/c11.svg">
+&lt;img src=&#34;gitink/c11.svg&#34;&gt;
 
 ---
 
@@ -879,13 +882,13 @@ $ git commit
 $ git push
 ```
 
-<img src="gitink/c12.svg">
+&lt;img src=&#34;gitink/c12.svg&#34;&gt;
 
 ---
 
 ## Back on local computer
 
-<img src="gitink/c10.svg">
+&lt;img src=&#34;gitink/c10.svg&#34;&gt;
 
 ---
 
@@ -897,7 +900,7 @@ $ git push
 $ git fetch  # obtain new remote commits but do not change anything locally
 ```
 
-<img src="gitink/c13.svg">
+&lt;img src=&#34;gitink/c13.svg&#34;&gt;
 
 ---
 
@@ -906,7 +909,7 @@ $ git fetch  # obtain new remote commits but do not change anything locally
 ```
 $ git pull # does a fetch and a merge to your local repository
 ```
-<img src="gitink/c14.svg">
+&lt;img src=&#34;gitink/c14.svg&#34;&gt;
 
 ---
 
@@ -947,11 +950,11 @@ Contributing to open source
 
 * In the web interface of the reference repo, fork a copy to your own account
 * Clone from your copied repository to your work space. By default your fork
-will have now have remote label 'origin'
-* It is customary to define the reference repo with the remote label "upstream"
+will have now have remote label &#39;origin&#39;
+* It is customary to define the reference repo with the remote label &#34;upstream&#34;
 
 ```
-$ git remote add upstream <url of reference repo>
+$ git remote add upstream &lt;url of reference repo&gt;
 ```
 
 ---
@@ -964,13 +967,13 @@ $ git remote add upstream <url of reference repo>
 $ git fetch upstream
 ```
 
-<img src="gitink/c15.svg">
+&lt;img src=&#34;gitink/c15.svg&#34;&gt;
 
 ---
 
 ## Github collaborative workflow
 
-* Create and checkout a 'fix' branch for a particular change
+* Create and checkout a &#39;fix&#39; branch for a particular change
 
 ```
 $ git checkout -b fix
@@ -980,10 +983,10 @@ $ git checkout -b fix
 
 ```
 $ git add .
-$ git commit -m "This is my fix"
+$ git commit -m &#34;This is my fix&#34;
 ```
 
-<img src="gitink/c16.svg">
+&lt;img src=&#34;gitink/c16.svg&#34;&gt;
 
 ---
 
@@ -995,7 +998,7 @@ $ git commit -m "This is my fix"
 $ git push origin fix
 ```
 
-<img src="gitink/c17.svg">
+&lt;img src=&#34;gitink/c17.svg&#34;&gt;
 
 * Now you are ready to do a pull request in the Github web interface
 
@@ -1003,15 +1006,15 @@ $ git push origin fix
 
 ## Github workflow scheme
 
-<!--
-<div class="row">
-<div class="col-md-9">
-<img class="img-responsive" src="https://lh3.googleusercontent.com/e56nmW1H1vOmGoR0EVswqus0EcCFMPjefwrFDc6KS5Gm2Yc7P1VEy9WrxHu7iqkst6t-WFhhpXYqhwcY1cOAPUNLbimPm7Uvkl4ZanbNKed-wqFs1eae_hLvDB0jdko0hfNibGl7FA=w2400">
-</div>
-</div>
--->
+&lt;!--
+&lt;div class=&#34;row&#34;&gt;
+&lt;div class=&#34;col-md-9&#34;&gt;
+&lt;img class=&#34;img-responsive&#34; src=&#34;https://lh3.googleusercontent.com/e56nmW1H1vOmGoR0EVswqus0EcCFMPjefwrFDc6KS5Gm2Yc7P1VEy9WrxHu7iqkst6t-WFhhpXYqhwcY1cOAPUNLbimPm7Uvkl4ZanbNKed-wqFs1eae_hLvDB0jdko0hfNibGl7FA=w2400&#34;&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+--&gt;
 
-<img src="https://lh3.googleusercontent.com/e56nmW1H1vOmGoR0EVswqus0EcCFMPjefwrFDc6KS5Gm2Yc7P1VEy9WrxHu7iqkst6t-WFhhpXYqhwcY1cOAPUNLbimPm7Uvkl4ZanbNKed-wqFs1eae_hLvDB0jdko0hfNibGl7FA=w2400" height=600>
+&lt;img src=&#34;https://lh3.googleusercontent.com/e56nmW1H1vOmGoR0EVswqus0EcCFMPjefwrFDc6KS5Gm2Yc7P1VEy9WrxHu7iqkst6t-WFhhpXYqhwcY1cOAPUNLbimPm7Uvkl4ZanbNKed-wqFs1eae_hLvDB0jdko0hfNibGl7FA=w2400&#34; height=600&gt;
 
 Drawing by Erik Fasterius
 
