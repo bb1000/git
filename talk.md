@@ -261,7 +261,8 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 </pre>
 
-* Git warns about **untracked** files
+* Git warns about *untracked* files (files that Git does not know anything
+  about)
 
 ---
 ## Add file to Git
@@ -269,7 +270,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 <pre>
 proj
 ├── .git
-└── hello.py
+└── <span style="color: green;">hello.py</span>
 </pre>
 
 
@@ -289,7 +290,8 @@ Changes to be committed:
 
 ### The staging area/cache
 
-* After `git add` a file is in the staging area (cache)
+* After `git add` a file is in the staging area (cache), is staged to be
+  committed to the repository
 * This is an intermediate level between the work directory and repository
 
 ---
@@ -370,6 +372,32 @@ The basic work cycle is edit-add-commit
     $ git add <file>  # cache your changes
     $ git commit -m <message> <file>  # save your changes in repository
 ```
+
+---
+
+## A mental model of the .git folder
+
+After committing two versions of a project file
+we can imagine a folder tree like this (not real)
+
+<pre>
+proj
+├── .git
+│   ├── cache
+│   │   └── hello.py
+│   └── repository
+│       └── commit1
+│           └── hello.py
+│       └── commit2
+│           └── hello.py
+└── hello.py
+</pre>
+
+* A `git add` copies from the work directory `proj/hello.py` to the cache
+  `/proj.git/cache/hello.py`
+* A `git commit` creates a new entry in the repository and copies from the
+  cache to a new folder, e.g. `proj/.git/repository/commit2/hello.py`
+* All old versions are preserved
 
 ---
 
