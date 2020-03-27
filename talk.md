@@ -819,7 +819,7 @@ $ git pull # does a fetch and a merge to your local repository
 * Locally: edit-add-commit
 
 ```
-    $ vim ...
+    $ [your-favorite-editor] filename
     $ git add...
     $ git commit...
 ```
@@ -835,23 +835,41 @@ $ git pull # does a fetch and a merge to your local repository
 
 ## Github collaborative workflow
 
-Contributing to open source
+### Contributing to open source
 
-* In the web interface of the reference repo, fork a copy to your own account
-* Clone from your copied repository to your work space. By default your fork
-will have now have remote label 'origin'
-* It is customary to define the reference repo with the remote label "upstream"
+A fork is your github copy the reference repository (here the class account) which you create in the web interface. We now have two remote repositories.
 
-```
-$ git remote add upstream <url of reference repo>
-```
+
+The name of a remote repository is an alias to a real address, and thinks may look different depending on order of commands, which repository you clone first and which you add later.
+
+We have two situations
+
+1. 
+   * You clone your fork (`git clone <fork url>`), this will be given the alias origin by default
+   * You may locally define the reference repository locally, `git remote add
+     upstream <reference url>` (`upstream` is a conventional name)
+
+2. 
+   * You clone the reference repo (`git clone <reference url>`), which now will
+   be the `origin`
+   * You define locally your fork with e.g. `git remote add myfork <fork url>`
+   which gives your github copy the alias `myfork`
+
+Either method is equally valid, but the `origin` label means different things
 
 ---
 
-## Github collaborative workflow
+## Github collaborative workflow (alt 1)
 
+* Clone your fork
+~~~
+$ git clone <fork url>
+~~~
+* Define the reference repo as `upstream`
+~~~
+$ git remote add upstream <reference url>
+~~~
 * Retrieve the current information from the reference repo
-
 ```
 $ git fetch upstream
 ```
