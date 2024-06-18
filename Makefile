@@ -1,4 +1,4 @@
-index.html: talk.md
+index.html: talk.md refreeze/slides.html
 	python refreeze/freeze.py
 
 test:

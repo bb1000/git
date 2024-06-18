@@ -3,8 +3,8 @@
 </script>
 <style>
 pre.code {
-    color: #ffffff;
-    background: #000000;
+    color: #000000;
+    background: gruvbox-light;
     border-radius: 5px;
     font-size: 0.8em;
     padding: 15px;
@@ -28,8 +28,6 @@ BB1000 Programming in Python
 KTH
 
 ---
-
-layout: false
 
 ## Learning objectives
 
@@ -134,17 +132,11 @@ $ cp -r Project Project.save.v2.new
 * Cache: temporary area for files you intend to keep
 * Commit: a snapshot of the project files at a point in time
 * Repository: sequence/tree of commits (history of the project)
+* Branch: an alias for a commit (often the latest along a line of development)
 
 ---
 
-## Concepts
-
-* Work directory: local directory where you work
-* Cache: temporary area for files you intend to keep
-* Commit: a snapshot of the project files at a point in time
-* Repository: sequence/tree of commits (history of the project)
-
-### 11 basic commands
+## 11 basic commands
 
 * Initialize
    - clone
@@ -171,9 +163,12 @@ $ cp -r Project Project.save.v2.new
 ```
     $ git config --global user.name "First Last"
     $ git config --global user.email "first.last@isp.com"
+    $ git config --global init.defaultBranch main
 ```
 
-Creates a configuration file ``~/.gitconfig``
+* creates a configuration file ``~/.gitconfig``
+* git wants to know who you are
+* let "main" be the default branch name in new projects
 
 ```
     [user]
@@ -185,32 +180,32 @@ Creates a configuration file ``~/.gitconfig``
 
 ---
 
-## Initializing a repository
+## Initializing 
 
-* Use an existing directory or create a new project directory
+* a new empty repository
 
-```
-    $ mkdir proj
-```
-
-<pre class='foo'>
-    proj/
-</pre>
-
-* Go to the directory and initialize
-
-```
-    $ cd proj
-    $ git init
-    Initialized empty Git repository in (...)proj/.git/
-```
-
+~~~
+$ git init proj
+~~~
 <pre>
     proj/
     └── .git
 </pre>
 
+* an existing project folder
+
+~~~
+$ cd oldproj
+$ git init
+~~~
+
+<pre>
+    oldproj/
+    └── .git
+</pre>
+
 ---
+
 ## Check status
 
 <pre>
@@ -223,7 +218,7 @@ proj/
 
 ```
 $ git status
-On branch master
+On branch main
 
 No commits yet
 
@@ -231,7 +226,7 @@ nothing to commit (create/copy files and use "git add" to track)
 ```
 
 ---
-## Create a new file `hello.py`
+## Create a new file
 
 <pre>
 proj
@@ -247,9 +242,9 @@ print("Hello world!")
 
 * Recheck status
 
-<pre style="color: #ffffff; background: #000000; border-radius: 5px; font-size: 0.8em; padding: 15px">
+<pre>
 $ git status
-On branch master
+On branch main
 
 No commits yet
 
@@ -274,18 +269,18 @@ proj
 </pre>
 
 
-<pre class="code">
+<pre>
 $ git add hello.py
 
 $ git status
-On branch master
+On branch main
 
 No commits yet
 
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 
-    <text style="color: lightgreen;"> new file:   hello.py</text>
+    <text style="color: green;"> new file:   hello.py</text>
 </pre>
 
 ### The staging area/cache
@@ -308,7 +303,7 @@ proj
 
 ```
     $ git commit -m "First hello"
-    [master (root-commit) cf06b48] First hello
+    [main (root-commit) cf06b48] First hello
      1 file changed, 1 insertion(+)
      create mode 100644 hello.py
 ```
@@ -317,7 +312,7 @@ proj
 
 ```
     $ git status
-    On branch master
+    On branch main
     nothing to commit, working directory clean
 ```
 
@@ -407,7 +402,7 @@ To see the commit history of the project files
 
 <pre class="code">
 $ git log --oneline
-<span class="commit">f56e3da</span> (<span class="cyan">HEAD</span> -> <span class="green">master</span>) First hello
+<span class="commit">f56e3da</span> (<span class="cyan">HEAD</span> -> <span class="green">main</span>) First hello
 </pre>
 
 <center>
@@ -415,8 +410,8 @@ $ git log --oneline
 </center>
 
 * A branch is viewed as a line of a development
-* Initial default branch is always `master`
-* A branch in practise a label for a particular commit
+* Initial default branch is always `main`
+* A branch in practice a label for a particular commit
 * HEAD is an alias for the current active branch
 
 ---
@@ -434,7 +429,7 @@ print("Hello there world!")
 
 <pre class="code">
 $ git status
-On branch master
+On branch main
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
@@ -468,9 +463,9 @@ index ed708ec..01c97be 100644
 ```bash
 $ git add hello.py
 $ git status
-On branch master
+On branch main
 Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
+  (use "git restore --staged <file>..." to unstage)
 
 	modified:   hello.py
 ```
@@ -479,7 +474,7 @@ Changes to be committed:
 
 ```bash
 $ git commit -m "Change greeting"
-[master f7efe62] Change greeting
+[main f7efe62] Change greeting
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 ---
@@ -488,7 +483,7 @@ $ git commit -m "Change greeting"
 
 ```bash
 $ git log --oneline
-b895711 (HEAD -> master) Change greeting
+b895711 (HEAD -> main) Change greeting
 f56e3da First hello
 ```
 
@@ -506,14 +501,20 @@ Note: checking out 'f56e3da'.
 
 You are in 'detached HEAD' state. You can look around, make experimental
 changes and commit them, and you can discard any commits you make in this
-state without impacting any branches by performing another checkout.
+state without impacting any branches by switching back to a branch.
 
 If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -b with the checkout command again. Example:
+do so (now or later) by using -c with the switch command. Example:
 
-  git checkout -b <new-branch-name>
+  git switch -c <new-branch-name>
 
-HEAD is now at f56e3da... First hello
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at f56e3da First hello
 ```
 
 ```
@@ -525,16 +526,16 @@ print("Hello world")!
 
 ```
 $ git log --oneline --all
-b895711 (master) Change greeting
+b895711 (main) Change greeting
 f56e3da (HEAD) First hello
 ```
 
 <img src="gitink/c3.svg">
 
 ```
-$git checkout master
+$git checkout main
 Previous HEAD position was f56e3da... First hello
-Switched to branch 'master'
+Switched to branch 'main'
 ```
 
 <img src="gitink/c4.svg">
@@ -566,14 +567,16 @@ work directory
 
 ## Branches
 
+* A branch is a label for a particular commit
+
 ```
-$ git branch in-more-languages
-$ git checkout in-more-languages 
+$ git branch in-more-languages # create a new branch
+$ git switch in-more-languages  # change active branch
 Switched to branch 'in-more-languages'
 ```
 ```
 $ git log --oneline --all
-b895711 (HEAD -> in-more-languages, master) Change greeting
+b895711 (HEAD -> in-more-languages, main) Change greeting
 f56e3da First hello
 ```
 <img src="gitink/c5.svg">
@@ -589,7 +592,10 @@ print("Bonjour tout le monde!")
 ```
 
 ```
-$ git add -u 
+$ git add -u  # update the cache with the modified files
+```
+
+```
 $ git commit -m "French"
 [in-more-languages 84bfae8] French
  1 file changed, 1 insertion(+)
@@ -598,7 +604,7 @@ $ git commit -m "French"
 ```
 $ git log --oneline
 84bfae8 (HEAD -> in-more-languages) French
-b895711 (master) Change greeting
+b895711 (main) Change greeting
 f56e3da First hello
 ```
 ---
@@ -608,24 +614,24 @@ f56e3da First hello
 ```
 $ git log --oneline
 84bfae8 (HEAD -> in-more-languages) French
-b895711 (master) Change greeting
+b895711 (main) Change greeting
 f56e3da First hello
 ```
 <center><img src="gitink/c6.svg"></center>
 
 ---
 
-## Keep the changes: merge to master
+## Keep the changes: merge to main
 
 ```
-$ git checkout master
-Switched to branch 'master'
+$ git switch main
+Switched to branch 'main'
 ```
 <center><img src="gitink/c7.svg"></center>
 
 ---
 
-## Keep the changes: merge to master
+## Keep the changes: merge to main
 
 * Incorporate the changes from the `in-more-languages` branch
 
@@ -640,7 +646,7 @@ Fast-forward
 
 ---
 
-## Keep the changes: merge to master
+## Keep the changes: merge to main
 
 * If the old branch is not needed it may be deleted
 
@@ -653,8 +659,133 @@ Deleted branch in-more-languages (was 84bfae8).
 
 * Note: the branch concept brings to mind a certain line of development, like the
 branch of a tree. However a git branch name essentially a label for a
-particular commit. If one commit has two labels one of them can easily be
-deleted without loosing any information.
+particular commit. 
+* If one commit has two labels one of them can easily be
+deleted without losing any information.
+
+---
+## Conflicts
+
+* If two branches have modified the same file in the same place, a conflict
+  arises
+* Consider a German and a Spanish branch
+* Maria checks out a German branch and modifies the same line with "Guten Tag Welt"
+* Juan checks out a Spanish branch and adds "Hola mundo"
+
+~~~
+
+* df545d7 (HEAD -> Spanish) hola
+| * 49b6bf5 (German) guten tag
+|/
+* 84bfae8 (main) French
+* b895711 Change greeting
+* f56e3da First hello
+
+~~~
+<center><img src="gitink/c9a.svg"></center>
+
+~~~
+$ git diff German Spanish
+diff --git a/hello.py b/hello.py
+index 570e7aa..5b5ade6 100644
+--- a/hello.py
++++ b/hello.py
+@@ -1,4 +1,4 @@
+ #hello.py
+ print("Hello there world!")
+ print("Bonjour tout le monde!")
+-print("Guten Tag Welt!")#red
++print("Hola mundo!")#green
+~~~
+
+---
+
+* Maria finishes first and merges
+
+~~~
+* df545d7 (Spanish) hola
+| * 49b6bf5 (HEAD -> main, German) guten tag
+|/
+* 84bfae8 French
+* b895711 Change greeting
+* f56e3da First hello
+~~~
+<center><img src="gitink/c9b.svg"></center>
+
+---
+
+* Juan tries to merge and gets a conflict
+
+~~~
+$ git merge Spanish
+Auto-merging hello.py
+CONFLICT (content): Merge conflict in hello.py
+Automatic merge failed; fix conflicts and then commit the result.
+~~~
+
+
+* The file `hello.py` is now in a conflict state and contains
+
+~~~
+#hello.py
+print("Hello there world!")
+print("Bonjour tout le monde!")
+<<<<<<< HEAD
+print("Guten Tag Welt!")
+=======
+print("Hola mundo!")
+>>>>>>> Spanish
+~~~
+
+~~~
+$ git status
+On branch main
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both modified:   hello.py#red
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+~~~
+---
+
+* A choice to be made, on what to keep
+* Remove the conflict markers and save the file
+
+~~~
+#hello.py
+print("Hello there world!")
+print("Bonjour tout le monde!")
+print("Guten Tag Welt!")
+print("Hola mundo!")
+~~~
+
+* Add to cache and commit
+
+~~~
+$ git add hello.py
+$ git commit -m "Merge conflict resolved"
+~~~
+
+---
+
+~~~
+ $ git log --oneline --graph
+ *   8d626a5 (HEAD -> main) Merge conflict resolved
+ |\
+ | * df545d7 (Spanish) hola
+ * | 49b6bf5 (German) guten tag
+ |/
+ * 84bfae8 French
+ * b895711 Change greeting
+ * f56e3da First hello
+~~~
+
+<center><img src="gitink/c9c.svg"></center>
 
 ---
 
@@ -711,13 +842,13 @@ origin git@gits-15.sys.kth.se:<user>/proj (push)
 * push the local to the remote, and let the local branch track the remote repository
 
 ```
-$ git push --set-upstream origin master
+$ git push --set-upstream origin main
 ...
 To git@gits-15.sys.kth.se
- * [new branch]      master -> master
-Branch master set up to track remote branch master from origin.
+ * [new branch]      main -> master
+Branch main set up to track remote branch master from origin.
 $ git branch -vv
- * master 84bfae8 [origin/master] French
+ * main 84bfae8 [origin/master] French
 ```
 
 ---
@@ -736,7 +867,7 @@ the local
 <img src="gitink/c10.svg">
 
 In local repository also have knowledge about the status of the remote
-repositry in terms of an extra branch name `origin/master`
+repository in terms of an extra branch name `origin/main`
 
 ---
 
@@ -796,7 +927,7 @@ $ git fetch  # obtain new remote commits but do not change anything locally
 ## Back on local computer
 
 ```
-$ git pull # does a fetch and a merge to your local repository
+$ git merge origin/main # include changes in remote branch into current
 ```
 <img src="gitink/c14.svg">
 

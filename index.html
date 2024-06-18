@@ -132,18 +132,16 @@
     </script>
     <textarea id="source">
 name: inverse
-layout: true
+layout: false
 class: center, middle, inverse
-
----
 
 &lt;script type=&#34;text/javascript&#34;
   src=&#34;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&#34;&gt;
 &lt;/script&gt;
 &lt;style&gt;
 pre.code {
-    color: #ffffff;
-    background: #000000;
+    color: #000000;
+    background: gruvbox-light;
     border-radius: 5px;
     font-size: 0.8em;
     padding: 15px;
@@ -167,8 +165,6 @@ BB1000 Programming in Python
 KTH
 
 ---
-
-layout: false
 
 ## Learning objectives
 
@@ -273,17 +269,11 @@ $ cp -r Project Project.save.v2.new
 * Cache: temporary area for files you intend to keep
 * Commit: a snapshot of the project files at a point in time
 * Repository: sequence/tree of commits (history of the project)
+* Branch: an alias for a commit (often the latest along a line of development)
 
 ---
 
-## Concepts
-
-* Work directory: local directory where you work
-* Cache: temporary area for files you intend to keep
-* Commit: a snapshot of the project files at a point in time
-* Repository: sequence/tree of commits (history of the project)
-
-### 11 basic commands
+## 11 basic commands
 
 * Initialize
    - clone
@@ -310,9 +300,12 @@ $ cp -r Project Project.save.v2.new
 ```
     $ git config --global user.name &#34;First Last&#34;
     $ git config --global user.email &#34;first.last@isp.com&#34;
+    $ git config --global init.defaultBranch main
 ```
 
-Creates a configuration file ``~/.gitconfig``
+* creates a configuration file ``~/.gitconfig``
+* git wants to know who you are
+* let &#34;main&#34; be the default branch name in new projects
 
 ```
     [user]
@@ -324,32 +317,32 @@ Creates a configuration file ``~/.gitconfig``
 
 ---
 
-## Initializing a repository
+## Initializing 
 
-* Use an existing directory or create a new project directory
+* a new empty repository
 
-```
-    $ mkdir proj
-```
-
-&lt;pre class=&#39;foo&#39;&gt;
-    proj/
-&lt;/pre&gt;
-
-* Go to the directory and initialize
-
-```
-    $ cd proj
-    $ git init
-    Initialized empty Git repository in (...)proj/.git/
-```
-
+~~~
+$ git init proj
+~~~
 &lt;pre&gt;
     proj/
     └── .git
 &lt;/pre&gt;
 
+* an existing project folder
+
+~~~
+$ cd oldproj
+$ git init
+~~~
+
+&lt;pre&gt;
+    oldproj/
+    └── .git
+&lt;/pre&gt;
+
 ---
+
 ## Check status
 
 &lt;pre&gt;
@@ -362,7 +355,7 @@ proj/
 
 ```
 $ git status
-On branch master
+On branch main
 
 No commits yet
 
@@ -370,7 +363,7 @@ nothing to commit (create/copy files and use &#34;git add&#34; to track)
 ```
 
 ---
-## Create a new file `hello.py`
+## Create a new file
 
 &lt;pre&gt;
 proj
@@ -386,9 +379,9 @@ print(&#34;Hello world!&#34;)
 
 * Recheck status
 
-&lt;pre style=&#34;color: #ffffff; background: #000000; border-radius: 5px; font-size: 0.8em; padding: 15px&#34;&gt;
+&lt;pre&gt;
 $ git status
-On branch master
+On branch main
 
 No commits yet
 
@@ -413,18 +406,18 @@ proj
 &lt;/pre&gt;
 
 
-&lt;pre class=&#34;code&#34;&gt;
+&lt;pre&gt;
 $ git add hello.py
 
 $ git status
-On branch master
+On branch main
 
 No commits yet
 
 Changes to be committed:
   (use &#34;git rm --cached &lt;file&gt;...&#34; to unstage)
 
-    &lt;text style=&#34;color: lightgreen;&#34;&gt; new file:   hello.py&lt;/text&gt;
+    &lt;text style=&#34;color: green;&#34;&gt; new file:   hello.py&lt;/text&gt;
 &lt;/pre&gt;
 
 ### The staging area/cache
@@ -447,7 +440,7 @@ proj
 
 ```
     $ git commit -m &#34;First hello&#34;
-    [master (root-commit) cf06b48] First hello
+    [main (root-commit) cf06b48] First hello
      1 file changed, 1 insertion(+)
      create mode 100644 hello.py
 ```
@@ -456,7 +449,7 @@ proj
 
 ```
     $ git status
-    On branch master
+    On branch main
     nothing to commit, working directory clean
 ```
 
@@ -546,7 +539,7 @@ To see the commit history of the project files
 
 &lt;pre class=&#34;code&#34;&gt;
 $ git log --oneline
-&lt;span class=&#34;commit&#34;&gt;f56e3da&lt;/span&gt; (&lt;span class=&#34;cyan&#34;&gt;HEAD&lt;/span&gt; -&gt; &lt;span class=&#34;green&#34;&gt;master&lt;/span&gt;) First hello
+&lt;span class=&#34;commit&#34;&gt;f56e3da&lt;/span&gt; (&lt;span class=&#34;cyan&#34;&gt;HEAD&lt;/span&gt; -&gt; &lt;span class=&#34;green&#34;&gt;main&lt;/span&gt;) First hello
 &lt;/pre&gt;
 
 &lt;center&gt;
@@ -554,7 +547,7 @@ $ git log --oneline
 &lt;/center&gt;
 
 * A branch is viewed as a line of a development
-* Initial default branch is always `master`
+* Initial default branch is always `main`
 * A branch in practise a label for a particular commit
 * HEAD is an alias for the current active branch
 
@@ -573,7 +566,7 @@ print(&#34;Hello there world!&#34;)
 
 &lt;pre class=&#34;code&#34;&gt;
 $ git status
-On branch master
+On branch main
 Changes not staged for commit:
   (use &#34;git add &lt;file&gt;...&#34; to update what will be committed)
   (use &#34;git checkout -- &lt;file&gt;...&#34; to discard changes in working directory)
@@ -607,7 +600,7 @@ index ed708ec..01c97be 100644
 ```bash
 $ git add hello.py
 $ git status
-On branch master
+On branch main
 Changes to be committed:
   (use &#34;git reset HEAD &lt;file&gt;...&#34; to unstage)
 
@@ -618,7 +611,7 @@ Changes to be committed:
 
 ```bash
 $ git commit -m &#34;Change greeting&#34;
-[master f7efe62] Change greeting
+[main f7efe62] Change greeting
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 ---
@@ -627,7 +620,7 @@ $ git commit -m &#34;Change greeting&#34;
 
 ```bash
 $ git log --oneline
-b895711 (HEAD -&gt; master) Change greeting
+b895711 (HEAD -&gt; main) Change greeting
 f56e3da First hello
 ```
 
@@ -664,16 +657,16 @@ print(&#34;Hello world&#34;)!
 
 ```
 $ git log --oneline --all
-b895711 (master) Change greeting
+b895711 (main) Change greeting
 f56e3da (HEAD) First hello
 ```
 
 &lt;img src=&#34;gitink/c3.svg&#34;&gt;
 
 ```
-$git checkout master
+$git checkout main
 Previous HEAD position was f56e3da... First hello
-Switched to branch &#39;master&#39;
+Switched to branch &#39;main&#39;
 ```
 
 &lt;img src=&#34;gitink/c4.svg&#34;&gt;
@@ -705,14 +698,16 @@ work directory
 
 ## Branches
 
+* A branch is a label for a particular commit
+
 ```
-$ git branch in-more-languages
-$ git checkout in-more-languages 
+$ git branch in-more-languages # create a new branch
+$ git switch in-more-languages  # change active branch
 Switched to branch &#39;in-more-languages&#39;
 ```
 ```
 $ git log --oneline --all
-b895711 (HEAD -&gt; in-more-languages, master) Change greeting
+b895711 (HEAD -&gt; in-more-languages, main) Change greeting
 f56e3da First hello
 ```
 &lt;img src=&#34;gitink/c5.svg&#34;&gt;
@@ -737,7 +732,7 @@ $ git commit -m &#34;French&#34;
 ```
 $ git log --oneline
 84bfae8 (HEAD -&gt; in-more-languages) French
-b895711 (master) Change greeting
+b895711 (main) Change greeting
 f56e3da First hello
 ```
 ---
@@ -747,24 +742,24 @@ f56e3da First hello
 ```
 $ git log --oneline
 84bfae8 (HEAD -&gt; in-more-languages) French
-b895711 (master) Change greeting
+b895711 (main) Change greeting
 f56e3da First hello
 ```
 &lt;center&gt;&lt;img src=&#34;gitink/c6.svg&#34;&gt;&lt;/center&gt;
 
 ---
 
-## Keep the changes: merge to master
+## Keep the changes: merge to main
 
 ```
-$ git checkout master
-Switched to branch &#39;master&#39;
+$ git switch main
+Switched to branch &#39;main&#39;
 ```
 &lt;center&gt;&lt;img src=&#34;gitink/c7.svg&#34;&gt;&lt;/center&gt;
 
 ---
 
-## Keep the changes: merge to master
+## Keep the changes: merge to main
 
 * Incorporate the changes from the `in-more-languages` branch
 
@@ -779,7 +774,7 @@ Fast-forward
 
 ---
 
-## Keep the changes: merge to master
+## Keep the changes: merge to main
 
 * If the old branch is not needed it may be deleted
 
@@ -792,8 +787,9 @@ Deleted branch in-more-languages (was 84bfae8).
 
 * Note: the branch concept brings to mind a certain line of development, like the
 branch of a tree. However a git branch name essentially a label for a
-particular commit. If one commit has two labels one of them can easily be
-deleted without loosing any information.
+particular commit. 
+* If one commit has two labels one of them can easily be
+deleted without losing any information.
 
 ---
 
@@ -850,13 +846,13 @@ origin git@gits-15.sys.kth.se:&lt;user&gt;/proj (push)
 * push the local to the remote, and let the local branch track the remote repository
 
 ```
-$ git push --set-upstream origin master
+$ git push --set-upstream origin main
 ...
 To git@gits-15.sys.kth.se
- * [new branch]      master -&gt; master
-Branch master set up to track remote branch master from origin.
+ * [new branch]      main -&gt; master
+Branch main set up to track remote branch master from origin.
 $ git branch -vv
- * master 84bfae8 [origin/master] French
+ * main 84bfae8 [origin/master] French
 ```
 
 ---
@@ -875,7 +871,7 @@ the local
 &lt;img src=&#34;gitink/c10.svg&#34;&gt;
 
 In local repository also have knowledge about the status of the remote
-repositry in terms of an extra branch name `origin/master`
+repository in terms of an extra branch name `origin/main`
 
 ---
 
