@@ -8,7 +8,7 @@
                  xmlns="http://www.w3.org/2000/svg"
                  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
                  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-                 width="430.0"
+                 width="414.0"
                  height="150.0"
                  id="svg2"
                  version="1.1"
@@ -180,7 +180,7 @@
                  marker-end:url(#fullmarker);
                  stroke-miterlimit:4;
                  stroke-dasharray:none"
-                 d="M 394.0,-105.0 324.19,-105.0"
+                 d="M 386.0,-105.0 324.44,-105.0"
                  inkscape:connector-curvature="0" />
            
            <rect style="fill:#dddddd;
@@ -189,7 +189,7 @@
                         stroke-miterlimit:4;
                         stroke-opacity:1.0;
                         stroke-dasharray:none"
-                 width="72.0"
+                 width="56.0"
                  height="30.0"
                  x="358.0"
                  y="-120.0"
@@ -205,7 +205,7 @@
                         stroke:none;
                         font-family:DejaVu Sans Mono"
                  x="365.5"
-                 y="-99.5"> master</text>
+                 y="-99.5"> main</text>
            
                 </g>
               </svg>
