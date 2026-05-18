@@ -1,10 +1,4 @@
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-# Introduction to git
-
-BB1000 Programming in Python
-KTH
+# Version control
 
 ---
 
@@ -336,28 +330,6 @@ staging area (cache)
 work directory     <- init
 ```
 
----
-
-## The work cycle
-
-There are three levels
-
-* The work directory
-* The staging area
-* The repository
-
-```
-repository (.git)
-    ^
-    |   commit
-
-staging area (cache)
-    ^
-    |   add
-
-work directory     <- init
-```
-
 The basic work cycle is edit-add-commit
 
 ```
@@ -664,14 +636,14 @@ work directory     <- init, clone
 
 * Locally: edit-add-commit
 ```
-    $ vim ...
+    $ <your-favorite-editor> ...
     $ git add...
     $ git commit...
 ```
-* Sync with remote: pull-push
+* Sync with remote: push and pull (fetch + merge)
 ```
-    $ git pull
     $ git push
+    $ git pull
 ```
 
 ---
